@@ -1,7 +1,7 @@
 const Image = require('../models/Image');
 
 // Definimos la URL base local
-const API_BASE_URL = 'http://localhost:3001'; // Asegúrate de que este puerto coincida con el de tu API
+const API_BASE_URL = 'https://api-casal.onrender.com'; // Asegúrate de que este puerto coincida con el de tu API
 
 exports.getRandomImage = async (req, res) => {
   try {
