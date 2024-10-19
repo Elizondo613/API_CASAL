@@ -4,6 +4,7 @@ const { getRandomTrivia } = require('../controllers/trivia_controller');
 const { getRandomRiddle } = require('../controllers/riddle_controller');
 const { getRandomImage } = require('../controllers/Image_controller');
 const { getRandomRetoLeyenda } = require('../controllers/retoLeyenda_controller');
+const { getRandomMimica } = require('../controllers/mimica_controller');
 
 router.get('/random/:type', async (req, res) => {
   try {
@@ -22,6 +23,9 @@ router.get('/random/:type', async (req, res) => {
         break;
       case 'reto':
         reto = await getRandomRetoLeyenda();
+        break;
+      case 'mimica':
+        reto = await getRandomMimica();
         break;
       default:
         return res.status(400).json({ message: 'Tipo de reto no válido' });
