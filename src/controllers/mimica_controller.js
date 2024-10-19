@@ -7,9 +7,9 @@ exports.getRandomMimica = async (req, res) => {
       return res.status(404).json({ message: 'No se encontraron mimicas' });
     }
     
-    const { text, category, _id } = riddle[0];
+    const { text, category, _id } = mimica[0];
     res.json({
-      riddleId: _id,
+      mimicaId: _id,
       text,
       category
     });
