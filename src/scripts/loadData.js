@@ -4,136 +4,136 @@ const Reto = require('../models/Reto');
 
 const retos = [
   {
-    text: "Escribe una frase sobre la leyenda de guatemala que más te aterra.",
-    category: "Facebook"
+    text: "Haz un video contando la historia de Guatemala en 60 segundos usando solo emojis.",
+    category: "TikTok"
   },
   {
-    text: "Comparte que tuviste una noche romántica en Tikal con un turista de (qué país)",
-    category: "Facebook"
+    text: "Crea un transition challenge de turista normal a explorador maya.",
+    category: "TikTok"
   },
   {
-    text: "Recomienda una película que capture la esencia de Guatemala.",
-    category: "Facebook"
+    text: "Haz un tutorial de cómo hacer un mole en 30 segundos (con comedia).",
+    category: "TikTok"
   },
   {
-    text: "Publica una foto de tu plato típico guatemalteco favorito y di por qué lo es.",
-    category: "Facebook"
+    text: "Crea un video mostrando 5 lugares turísticos de Guatemala en versión miniatura (usando objetos caseros).",
+    category: "TikTok"
   },
   {
-    text: "Etiqueta a un amigo y cuéntale un chiste que involucre una leyenda.",
-    category: "Facebook"
+    text: "Haz un dueto con un sonido tradicional guatemalteco y baila como un personaje histórico.",
+    category: "TikTok"
   },
   {
-    text: "Comparte un estado imaginando qué pasaría si el Sombrerón tuviera Instagram.",
-    category: "Facebook"
+    text: "Crea un video de 'expectativa vs realidad' sobre cocinar un platillo guatemalteco por primera vez.",
+    category: "TikTok"
   },
   {
-    text: "Recomienda un libro que mencione o sea de Guatemala.",
-    category: "Facebook"
+    text: "Haz un lip-sync con un diálogo famoso pero tradúcelo al kaqchikel (con subtítulos cómicos).",
+    category: "TikTok"
   },
   {
-    text: "Escribe una historia corta donde nadaste en el Lago de Atitlán.",
-    category: "Facebook"
+    text: "Crea un video de transición de tu ropa normal a un traje típico guatemalteco.",
+    category: "TikTok"
   },
   {
-    text: "Publica una foto de un mercado de guatemala y describe los olores en una frase poética.",
-    category: "Facebook"
+    text: "Haz un tutorial rápido de cómo dibujar un quetzal estilizado.",
+    category: "TikTok"
   },
   {
-    text: "Comparte una foto desde la cima de un volcán de Guate y escribe ¿quién para subir?.",
-    category: "Facebook"
+    text: "Crea un video usando el efecto de cámara lenta para una 'carrera de tamales'.",
+    category: "TikTok"
   },
   {
-    text: "Escribe una frase que defienda el hábitat del quetzal y sube una foto del ave.",
-    category: "Facebook"
+    text: "Haz un 'storytime' contando una experiencia turística épica en Guatemala en 3 partes.",
+    category: "TikTok"
   },
   {
-    text: "Etiqueta a tres amigos y retales a nombrar tres platillos guatemaltecos.",
-    category: "Facebook"
+    text: "Crea un video de 'un día en la vida de' una estatua en Tikal.",
+    category: "TikTok"
   },
   {
-    text: "Comparte una leyenda y agrégale un final alternativo moderno.",
-    category: "Facebook"
+    text: "Haz un reto de baile inspirado en movimientos mayas con música electrónica.",
+    category: "TikTok"
   },
   {
-    text: "Recomienda un restaurante típico o café de tu ciudad.",
-    category: "Facebook"
+    text: "Crea un video ASMR con sonidos de la preparación de un textil guatemalteco.",
+    category: "TikTok"
   },
   {
-    text: "Publica una foto de una iglesia colonial y di que ahí aparece la Siguanaba.",
-    category: "Facebook"
+    text: "Haz un tour rápido y cómico por un mercado local.",
+    category: "TikTok"
   },
   {
-    text: "Escribe una frase que describa el sabor del café guatemalteco a un extraterrestre.",
-    category: "Facebook"
+    text: "Crea un video de 'adivina la comida guatemalteca' usando solo emojis.",
+    category: "TikTok"
   },
   {
-    text: "Escribe  sobre un lugar poco conocido de Guatemala y por qué deberíamos visitarlo.",
-    category: "Facebook"
+    text: "Haz un video de '3 cosas que no sabías' sobre palabras guatemaltecas.",
+    category: "TikTok"
   },
   {
-    text: "Crea un post sobre cómo sería un día en la vida de Tecún Umán en 2024.",
-    category: "Facebook"
+    text: "Crea un transition challenge de turista perdido a guía experto de Guatemala.",
+    category: "TikTok"
   },
   {
-    text: "Recomienda un lugar en que la llorona pueda aparecer.",
-    category: "Facebook"
+    text: "Haz un video reaccionando a probar comida picante guatemalteca por primera vez.",
+    category: "TikTok"
   },
   {
-    text: "Escribe que para tu cumpleaños quieres una piñata de tu leyenda favorita y cual es.",
-    category: "Facebook"
+    text: "Crea un tutorial de cómo hacer una piñata casera de un personaje de leyenda.",
+    category: "TikTok"
   },
   {
-    text: "Comparte una foto con la persona de tu familia que sea más llorona o lloron.",
-    category: "Facebook"
+    text: "Haz un video de 'encuentra al quetzal' escondido en diferentes escenas de Guatemala.",
+    category: "TikTok"
   },
   {
-    text: "Etiqueta a tres amigos y pregúntales si te acompañan a tomar tu atol favorito.",
-    category: "Facebook"
+    text: "Crea un 'day in the life' de un volcán guatemalteco.",
+    category: "TikTok"
   },
   {
-    text: "Pública si tu actual o anterior pareja fuera un helado cuál sería y por qué.",
-    category: "Facebook"
+    text: "Haz un video comparando modismos guatemaltecos con los de otros países.",
+    category: "TikTok"
   },
   {
-    text: "Recomienda una serie de TV que te gustaría ver ambientada en Guatemala.",
-    category: "Facebook"
+    text: "Crea un reto de actuación interpretando diferentes personajes históricos de Guatemala en situaciones modernas.",
+    category: "TikTok"
   },
   {
-    text: "Escribe prefiero que me enamore el sombreron o la siguanaba, qué (etiqueta a un amigo)",
-    category: "Facebook"
+    text: "Haz un video de '5 datos curiosos sobre Guatemala' que parezcan falsos pero son verdaderos.",
+    category: "TikTok"
   },
   {
-    text: "Confiesa cuando fue la ultima vez en donde pudo aparecer el cadejo",
-    category: "Facebook"
+    text: "Crea un transition challenge de ciudad moderna a antigua ciudad maya.",
+    category: "TikTok"
   },
   {
-    text: "Crea un post sobre tradiciones guatemaltecas que te gustaría que fueran tendencia mundial.",
-    category: "Facebook"
+    text: "Haz un video de 'sonidos de Guatemala' usando solo objetos encontrados en casa.",
+    category: "TikTok"
   },
   {
-    text: "Recomienda un videojuego y explica cómo lo adoptarías a un escenario guatemalteco.",
-    category: "Facebook"
+    text: "Crea un tutorial de cómo hacer un tejido típico usando materiales inesperados.",
+    category: "TikTok"
   },
   {
-    text: "Escribe en que equipo de futbol de gt te gustaría que juegue Messi o en su defecto CR7",
-    category: "Facebook"
+    text: "Haz un video de 'adivina la leyenda guatemalteca' usando solo mímica.",
+    category: "TikTok"
   },
   {
-    text: "Describe cómo sería una leyenda de gt si tu la inventaras.",
-    category: "Facebook"
+    text: "Crea un reto de baile fusionando pasos tradicionales guatemaltecos con bailes virales de TikTok.",
+    category: "TikTok"
   },
   {
-    text: "Etiqueta a un amigo y pregúntale qué superhéroe crearía basado en la cultura guatemalteca.",
-    category: "Facebook"
+    text: "Haz un video de 'transforma tu cocina' en un puesto de comida callejera guatemalteca.",
+    category: "TikTok"
   },
   {
-    text: "Publica una foto de una carreta de cheveres o shucos escribe invito a los primero tres likes.",
-    category: "Facebook"
+    text: "Crea un 'antes y después' de sitios famosos de Guatemala con un filtro de 'Guatemala 2100'.",
+    category: "TikTok"
   },
   {
-    text: "Recomienda un meme que capture perfectamente el humor guatemalteco.",
-    category: "Facebook"
+    text: "Haz un video recopilando las reacciones más divertidas de gente probando comida guatemalteca por primera vez.",
+    category: "TikTok"
   },
 ];
 

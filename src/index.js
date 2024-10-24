@@ -18,7 +18,6 @@ app.use(express.json());
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
 
 // Conectar a la base de datos
-//DT3YRSLoVDdyjP0w
 connectDB();
 
 // Rutas
