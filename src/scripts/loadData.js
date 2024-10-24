@@ -1,407 +1,139 @@
 require('dotenv').config();
 const mongoose = require('mongoose');
-const Mimica = require('../models/Mimica');
+const Reto = require('../models/Reto');
 
-const mimicas = [
+const retos = [
   {
-    text: "Tejer un huipil tradicional",
-    category: "mim"
+    text: "Escribe una frase sobre la leyenda de guatemala que más te aterra.",
+    category: "Facebook"
   },
   {
-    text: "Correr de noche",
-    category: "mim"
+    text: "Comparte que tuviste una noche romántica en Tikal con un turista de (qué país)",
+    category: "Facebook"
   },
   {
-    text: "Cocinar tortillas a mano",
-    category: "mim"
+    text: "Recomienda una película que capture la esencia de Guatemala.",
+    category: "Facebook"
   },
   {
-    text: "Nadar en el mar",
-    category: "mim"
+    text: "Publica una foto de tu plato típico guatemalteco favorito y di por qué lo es.",
+    category: "Facebook"
   },
   {
-    text: "Tocar la marimba",
-    category: "mim"
+    text: "Etiqueta a un amigo y cuéntale un chiste que involucre una leyenda.",
+    category: "Facebook"
   },
   {
-    text: "Leer un libro de terror",
-    category: "mim"
+    text: "Comparte un estado imaginando qué pasaría si el Sombrerón tuviera Instagram.",
+    category: "Facebook"
   },
   {
-    text: "Bailar el meneadito",
-    category: "mim"
+    text: "Recomienda un libro que mencione o sea de Guatemala.",
+    category: "Facebook"
   },
   {
-    text: "Cepillarse los dientes",
-    category: "mim"
+    text: "Escribe una historia corta donde nadaste en el Lago de Atitlán.",
+    category: "Facebook"
   },
   {
-    text: "Ecalar el volcán",
-    category: "mim"
+    text: "Publica una foto de un mercado de guatemala y describe los olores en una frase poética.",
+    category: "Facebook"
   },
   {
-    text: "Jugar tenis",
-    category: "mim"
+    text: "Comparte una foto desde la cima de un volcán de Guate y escribe ¿quién para subir?.",
+    category: "Facebook"
   },
   {
-    text: "Hacer una llamada telefónica",
-    category: "mim"
+    text: "Escribe una frase que defienda el hábitat del quetzal y sube una foto del ave.",
+    category: "Facebook"
   },
   {
-    text: "Preparar el almuerzo",
-    category: "mim"
+    text: "Etiqueta a tres amigos y retales a nombrar tres platillos guatemaltecos.",
+    category: "Facebook"
   },
   {
-    text: "Pintar un cuadro",
-    category: "mim"
+    text: "Comparte una leyenda y agrégale un final alternativo moderno.",
+    category: "Facebook"
   },
   {
-    text: "Volar una cometa",
-    category: "mim"
+    text: "Recomienda un restaurante típico o café de tu ciudad.",
+    category: "Facebook"
   },
   {
-    text: "Colocar un cuadro en la pared",
-    category: "mim"
+    text: "Publica una foto de una iglesia colonial y di que ahí aparece la Siguanaba.",
+    category: "Facebook"
   },
   {
-    text: "Conducir un automóvil",
-    category: "mim"
+    text: "Escribe una frase que describa el sabor del café guatemalteco a un extraterrestre.",
+    category: "Facebook"
   },
   {
-    text: "Jugar fútbol",
-    category: "mim"
+    text: "Escribe  sobre un lugar poco conocido de Guatemala y por qué deberíamos visitarlo.",
+    category: "Facebook"
   },
   {
-    text: "Tirar un petate al piso",
-    category: "mim"
+    text: "Crea un post sobre cómo sería un día en la vida de Tecún Umán en 2024.",
+    category: "Facebook"
   },
   {
-    text: "Planchar ropa",
-    category: "mim"
+    text: "Recomienda un lugar en que la llorona pueda aparecer.",
+    category: "Facebook"
   },
   {
-    text: "Navegar una canoa en el lago de Atitlán",
-    category: "mim"
+    text: "Escribe que para tu cumpleaños quieres una piñata de tu leyenda favorita y cual es.",
+    category: "Facebook"
   },
   {
-    text: "Tomar una fotografía",
-    category: "mim"
+    text: "Comparte una foto con la persona de tu familia que sea más llorona o lloron.",
+    category: "Facebook"
   },
   {
-    text: "Preparar una tortilla con chicharron",
-    category: "mim"
+    text: "Etiqueta a tres amigos y pregúntales si te acompañan a tomar tu atol favorito.",
+    category: "Facebook"
   },
   {
-    text: "Montar a caballo",
-    category: "mim"
+    text: "Pública si tu actual o anterior pareja fuera un helado cuál sería y por qué.",
+    category: "Facebook"
   },
   {
-    text: "Tocar la guitarra",
-    category: "mim"
+    text: "Recomienda una serie de TV que te gustaría ver ambientada en Guatemala.",
+    category: "Facebook"
   },
   {
-    text: "Hacer un volcancito de tierra",
-    category: "mim"
+    text: "Escribe prefiero que me enamore el sombreron o la siguanaba, qué (etiqueta a un amigo)",
+    category: "Facebook"
   },
   {
-    text: "Hacer ejercicio en el gimnasio",
-    category: "mim"
+    text: "Confiesa cuando fue la ultima vez en donde pudo aparecer el cadejo",
+    category: "Facebook"
   },
   {
-    text: "Pescar",
-    category: "mim"
+    text: "Crea un post sobre tradiciones guatemaltecas que te gustaría que fueran tendencia mundial.",
+    category: "Facebook"
   },
   {
-    text: "Disfrazarte del sombreron",
-    category: "mim"
+    text: "Recomienda un videojuego y explica cómo lo adoptarías a un escenario guatemalteco.",
+    category: "Facebook"
   },
   {
-    text: "Escribir una carta",
-    category: "mim"
+    text: "Escribe en que equipo de futbol de gt te gustaría que juegue Messi o en su defecto CR7",
+    category: "Facebook"
   },
   {
-    text: "Cortar café en una finca",
-    category: "mim"
+    text: "Describe cómo sería una leyenda de gt si tu la inventaras.",
+    category: "Facebook"
   },
   {
-    text: "Jugar baloncesto",
-    category: "mim"
+    text: "Etiqueta a un amigo y pregúntale qué superhéroe crearía basado en la cultura guatemalteca.",
+    category: "Facebook"
   },
   {
-    text: "Coser un vestido",
-    category: "mim"
+    text: "Publica una foto de una carreta de cheveres o shucos escribe invito a los primero tres likes.",
+    category: "Facebook"
   },
   {
-    text: "Preparar tamales",
-    category: "mim"
-  },
-  {
-    text: "Esquiar",
-    category: "mim"
-  },
-  {
-    text: "Bailar salsa",
-    category: "mim"
-  },
-  {
-    text: "Hacer un plato de barro",
-    category: "mim"
-  },
-  {
-    text: "Cocinar huevos estrellados",
-    category: "mim"
-  },
-  {
-    text: "Jugar voleibol",
-    category: "mim"
-  },
-  {
-    text: "Tejer un vestido de 15 años",
-    category: "mim"
-  },
-  {
-    text: "Maquillarse como payaso",
-    category: "mim"
-  },
-  {
-    text: "Regatear en un mercado local",
-    category: "mim"
-  },
-  {
-    text: "Caminar por la cuerda floja",
-    category: "mim"
-  },
-  {
-    text: "Jugar golf",
-    category: "mim"
-  },
-  {
-    text: "Hacer una entrega en moto",
-    category: "mim"
-  },
-  {
-    text: "Plantar un árbol",
-    category: "mim"
-  },
-  {
-    text: "Tocar el piano",
-    category: "mim"
-  },
-  {
-    text: "Ser un turista en Semana Santa",
-    category: "mim"
-  },
-  {
-    text: "Hacer malabares",
-    category: "mim"
-  },
-  {
-    text: "Practicar yoga",
-    category: "mim"
-  },
-  {
-    text: "Tallar una estela maya",
-    category: "mim"
-  },
-  {
-    text: "Surfear",
-    category: "mim"
-  },
-  {
-    text: "Jugar ajedrez",
-    category: "mim"
-  },
-  {
-    text: "Tiro al blanco en la feria",
-    category: "mim"
-  },
-  {
-    text: "Cortar el pelo",
-    category: "mim"
-  },
-  {
-    text: "Jugar béisbol",
-    category: "mim"
-  },
-  {
-    text: "Comprar un morral típico",
-    category: "mim"
-  },
-  {
-    text: "Escalar una montaña",
-    category: "mim"
-  },
-  {
-    text: "Bailar breakdance",
-    category: "mim"
-  },
-  {
-    text: "Preparar fiambre (plato festivo)",
-    category: "mim"
-  },
-  {
-    text: "Patinar sobre hielo",
-    category: "mim"
-  },
-  {
-    text: "Jugar ping pong",
-    category: "mim"
-  },
-  {
-    text: "Pedir unas pupusas en el parque",
-    category: "mim"
-  },
-  {
-    text: "Lavar un automóvil",
-    category: "mim"
-  },
-  {
-    text: "Tocar en violín la luna de Xelajú",
-    category: "mim"
-  },
-  {
-    text: "Hacer como pescado",
-    category: "mim"
-  },
-  {
-    text: "Hacer paracaidismo",
-    category: "mim"
-  },
-  {
-    text: "Jugar bolos",
-    category: "mim"
-  },
-  {
-    text: "Celebrar el año nuevo",
-    category: "mim"
-  },
-  {
-    text: "Arreglar una bicicleta",
-    category: "mim"
-  },
-  {
-    text: "Jugar canicas",
-    category: "mim"
-  },
-  {
-    text: "Acariciar al gato",
-    category: "mim"
-  },
-  {
-    text: "Bucear",
-    category: "mim"
-  },
-  {
-    text: "Jugar damas",
-    category: "mim"
-  },
-  {
-    text: "Usar una máscara de danza guatemalteca",
-    category: "mim"
-  },
-  {
-    text: "Practicar karate",
-    category: "mim"
-  },
-  {
-    text: "Tocar la trompeta",
-    category: "mim"
-  },
-  {
-    text: "Arreglar el árbol de navidad",
-    category: "mim"
-  },
-  {
-    text: "Jugar al billar",
-    category: "mim"
-  },
-  {
-    text: "Hacer origami",
-    category: "mim"
-  },
-  {
-    text: "Tallar una figura de madera",
-    category: "mim"
-  },
-  {
-    text: "Jugar rugby",
-    category: "mim"
-  },
-  {
-    text: "Tocar el saxofón",
-    category: "mim"
-  },
-  {
-    text: "Correr la antorha de septiembre",
-    category: "mim"
-  },
-  {
-    text: "Practicar tiro con arco",
-    category: "mim"
-  },
-  {
-    text: "Jugar dominó",
-    category: "mim"
-  },
-  {
-    text: "Hacer una piñata",
-    category: "mim"
-  },
-  {
-    text: "Practicar esgrima",
-    category: "mim"
-  },
-  {
-    text: "Tocar la bateria",
-    category: "mim"
-  },
-  {
-    text: "El gol del pin plata a Brasil",
-    category: "mim"
-  },
-  {
-    text: "La impresora no funciona",
-    category: "mim"
-  },
-  {
-    text: "Regatear aguacates en el mercado",
-    category: "mim"
-  },
-  {
-    text: "Cantar como Bad Bunny",
-    category: "mim"
-  },
-  {
-    text: "Practicar boxeo",
-    category: "mim"
-  },
-  {
-    text: "Tocar el arpa",
-    category: "mim"
-  },
-  {
-    text: "Entrar comida al cine",
-    category: "mim"
-  },
-  {
-    text: "Jugar waterpolo",
-    category: "mim"
-  },
-  {
-    text: "Hacerte un tatuaje",
-    category: "mim"
-  },
-  {
-    text: "Preparar chuchitos",
-    category: "mim"
-  },
-  {
-    text: "Practicar lanzamiento de jabalina",
-    category: "mim"
-  },
-  {
-    text: "Comer un elote loco",
-    category: "mim"
+    text: "Recomienda un meme que capture perfectamente el humor guatemalteco.",
+    category: "Facebook"
   },
 ];
 
@@ -410,10 +142,10 @@ async function loadData() {
     await mongoose.connect(process.env.MONGODB_URI);
     console.log('Conectado a MongoDB');
 
-    // Cargar mimicas
-    await Mimica.deleteMany({});
-    const mimicaResult = await Mimica.insertMany(mimicas);
-    console.log(`${mimicaResult.length} mimicas cargados exitosamente`);
+    // Cargar retos
+    await Reto.deleteMany({});
+    const retoResult = await Reto.insertMany(retos);
+    console.log(`${retoResult.length} retos cargados exitosamente`);
 
   } catch (error) {
     console.error('Error al cargar datos:', error);

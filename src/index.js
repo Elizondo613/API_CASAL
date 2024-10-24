@@ -7,6 +7,7 @@ const riddleRoutes = require('./routes/riddle_routes');
 const imageRoutes = require('./routes/image_routes');
 const retoRoutes = require('./routes/retoLeyenda_routes');
 const mimicaRoutes = require('./routes/mimica_routes');
+const retoRRoutes = require('./routes/reto_routes');
 const path = require('path');
 
 const app = express();
@@ -26,6 +27,7 @@ app.use('/api', riddleRoutes);
 app.use('/api', imageRoutes);
 app.use('/api', retoRoutes);
 app.use('/api', mimicaRoutes);
+app.use('/api', retoRRoutes);
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
