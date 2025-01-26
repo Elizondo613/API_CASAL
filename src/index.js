@@ -26,11 +26,19 @@ app.get('/', (req, res) => {
 // Ping
 cron.schedule('*/5 * * * *', async () => {
   try {
-    const response = await axios.get('https://api-casal.onrender.com/api/challenge/mimica');
+    const response = await axios.get('https://api-casal.onrender.com/health');
     console.log('Autoping exitoso:', new Date().toLocaleString());
   } catch (error) {
     console.error('Error en autoping:', error.message);
   }
+});
+
+// Agrega un endpoint de health check opcional
+app.get('/health', (req, res) => {
+  res.status(200).json({ 
+    status: 'OK', 
+    timestamp: new Date().toISOString() 
+  });
 });
 
 // Conectar a la base de datos
