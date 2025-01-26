@@ -10,6 +10,7 @@ const mimicaRoutes = require('./routes/mimica_routes');
 const retoRRoutes = require('./routes/reto_routes');
 const path = require('path');
 const cron = require('node-cron');
+const axios = require('axios');
 
 const app = express();
 
