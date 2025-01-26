@@ -9,6 +9,7 @@ const retoRoutes = require('./routes/retoLeyenda_routes');
 const mimicaRoutes = require('./routes/mimica_routes');
 const retoRRoutes = require('./routes/reto_routes');
 const path = require('path');
+const cron = require('node-cron');
 
 const app = express();
 
@@ -19,6 +20,16 @@ app.use('/assets', express.static(path.join(__dirname, 'assets')));
 
 app.get('/', (req, res) => {
   res.send('API is running!');
+});
+
+// Ping
+cron.schedule('*/5 * * * *', async () => {
+  try {
+    const response = await axios.get('https://api-casal.onrender.com/api/challenge/mimica');
+    console.log('Autoping exitoso:', new Date().toLocaleString());
+  } catch (error) {
+    console.error('Error en autoping:', error.message);
+  }
 });
 
 // Conectar a la base de datos
