@@ -1,3 +1,4 @@
+// APAGADO
 const Challenge = require('../models/retoLeyenda');
 
 exports.getRandomReto = async (req, res) => {

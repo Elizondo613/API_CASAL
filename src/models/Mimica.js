@@ -13,6 +13,11 @@ const mimicaSchema = new mongoose.Schema({
   category: {
     type: String,
     required: true
+  },
+  active: {
+    type: Boolean,
+    default: true,
+    required: true
   }
 });
 

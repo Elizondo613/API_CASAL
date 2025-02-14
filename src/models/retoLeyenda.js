@@ -1,3 +1,4 @@
+// APAGADO
 const mongoose = require('mongoose');
 
 const retoLeyendaSchema = new mongoose.Schema({
