@@ -1,13 +1,29 @@
 const Image = require('../models/Image');
+const path = require('path');
+const fs = require('fs');
 
-// Definimos la URL base local
-const API_BASE_URL = 'https://api-casal.onrender.com'; // Asegúrate de que este puerto coincida con el de tu API
+// Definimos la URL base
+const API_BASE_URL = 'https://api-casal.onrender.com';
 
 // 1. Crear una nueva imagen
 exports.createImage = async (req, res) => {
   try {
-    const { url, description, category } = req.body;
-    const newImage = new Image({ url, description, category });
+    // Determinar URL: Si hay archivo subido, crear ruta, sino usar la del body
+    const url = req.file 
+      ? `uploads/${req.file.filename}` 
+      : req.body.url;
+      
+    const { description, category } = req.body;
+    const active = req.body.active === 'true' || req.body.active === true;
+    
+    const newImage = new Image({ 
+      url, 
+      description, 
+      category,
+      type: 'image',
+      active 
+    });
+    
     await newImage.save();
     res.status(201).json({ message: 'Imagen creada correctamente', image: newImage });
   } catch (error) {
@@ -43,15 +59,51 @@ exports.getImageById = async (req, res) => {
 exports.updateImage = async (req, res) => {
   try {
     const { id } = req.params;
-    const { url, description, category, active } = req.body;
+    
+    // Datos a actualizar
+    const updateData = {};
+    
+    // Si hay campos en el body, actualizarlos
+    if (req.body.description) updateData.description = req.body.description;
+    if (req.body.category) updateData.category = req.body.category;
+    if (req.body.active !== undefined) {
+      updateData.active = req.body.active === 'true' || req.body.active === true;
+    }
+    
+    // Si hay archivo, actualizar URL y posiblemente eliminar archivo anterior
+    if (req.file) {
+      // Primero obtener la imagen actual para ver si necesitamos eliminar un archivo
+      const currentImage = await Image.findById(id);
+      if (currentImage && currentImage.url && currentImage.url.startsWith('uploads/')) {
+        // Intentar eliminar el archivo anterior
+        try {
+          const oldFilePath = path.join(__dirname, '..', currentImage.url);
+          if (fs.existsSync(oldFilePath)) {
+            fs.unlinkSync(oldFilePath);
+          }
+        } catch (err) {
+          console.error('Error al eliminar archivo anterior:', err);
+          // No interrumpir la actualización si falla la eliminación
+        }
+      }
+      
+      // Establecer nueva URL
+      updateData.url = `uploads/${req.file.filename}`;
+    } else if (req.body.url) {
+      // Si no hay archivo pero sí URL en el body, actualizarla
+      updateData.url = req.body.url;
+    }
+    
     const updatedImage = await Image.findByIdAndUpdate(
       id,
-      { url, description, category, active },
+      updateData,
       { new: true }
     );
+    
     if (!updatedImage) {
       return res.status(404).json({ message: 'Imagen no encontrada' });
     }
+    
     res.json({ message: 'Imagen actualizada correctamente', image: updatedImage });
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -62,10 +114,28 @@ exports.updateImage = async (req, res) => {
 exports.deleteImage = async (req, res) => {
   try {
     const { id } = req.params;
-    const deletedImage = await Image.findByIdAndDelete(id);
-    if (!deletedImage) {
+    
+    // Primero obtener la imagen para ver si hay archivo a eliminar
+    const image = await Image.findById(id);
+    
+    if (!image) {
       return res.status(404).json({ message: 'Imagen no encontrada' });
     }
+    
+    // Si la imagen tiene un archivo asociado, eliminarlo
+    if (image.url && image.url.startsWith('uploads/')) {
+      try {
+        const filePath = path.join(__dirname, '..', image.url);
+        if (fs.existsSync(filePath)) {
+          fs.unlinkSync(filePath);
+        }
+      } catch (err) {
+        console.error('Error al eliminar archivo:', err);
+        // Continuar con la eliminación del registro aunque falle la eliminación del archivo
+      }
+    }
+    
+    const deletedImage = await Image.findByIdAndDelete(id);
     res.json({ message: 'Imagen eliminada correctamente', image: deletedImage });
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -92,11 +162,17 @@ exports.getRandomImage = async (req, res) => {
       return res.status(404).json({ message: 'No se encontraron imágenes activas' });
     }
 
+    // Construir URL completa para imágenes en el servidor
+    let fullUrl = image.url;
+    if (image.url.startsWith('uploads/')) {
+      fullUrl = `${API_BASE_URL}/${image.url}`;
+    }
+
     // Devolver la imagen seleccionada
-    const { url, description, category, _id } = image;
+    const { description, category, _id } = image;
     res.json({
       imageId: _id,
-      url: `${API_BASE_URL}/${url}`, // Construye la URL completa con la base local
+      url: fullUrl,
       description,
       category
     });

@@ -51,6 +51,8 @@ app.use('/api', imageRoutes);
 app.use('/api', retoRoutes);
 app.use('/api', mimicaRoutes);
 app.use('/api', retoRRoutes);
+// Servir archivos estáticos de la carpeta uploads
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
